@@ -1,0 +1,47 @@
+﻿<%@ Master Language="C#" %>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">  
+
+<script runat="server">  
+
+    protected void CerrarSesion_Click(object sender, EventArgs e)
+    {
+        Session["session-id"] = null;
+        Response.Redirect("http://localhost:63664/WebForms/LoginForm.aspx");
+    }
+</script>  
+
+<html >  
+<head runat="server">  
+    <title>NTT-Shop Master</title>  
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" runat="server" />
+</head>  
+<body >  
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="smMaster" runat="server" EnablePartialRendering="true" EnableScriptGlobalization="true" ></asp:ScriptManager>
+        <div class="fixed-header">
+            <div class="container">
+                <nav id="nav-2">
+                    <%--<a href="Example.aspx">Example</a>--%>
+                    <a class="link-2" href="ProductsPage.aspx">Products</a>
+                    <%--<a href="LanguagePage.aspx">Language</a>--%>
+                    <a class="link-2" href="CartView.aspx">Carrito</a>                    
+                    <asp:LinkButton class="link-2" ID="LinkButton1" style="float:right" runat="server" CssClass="myclass" OnClick="CerrarSesion_Click">Cerrar sesión</asp:LinkButton>
+                    <a class="link-2" href="UserProfile.aspx" style="float:right">Perfil</a>
+                    <a class="link-2" href="MyOrders.aspx" style="float:right">Pedidos</a>
+                </nav>               
+            </div>
+        </div>
+
+        <div class="container">
+            <asp:contentplaceholder id="ContentPlaceHolder1" runat="server" />  
+        </div>  
+        <div class="fixed-footer">
+            <div class="container">
+                <nav>
+                    <a href="https://es.nttdata.com">nttdata.com</a>
+                </nav>
+            </div>        
+        </div>    
+    </form>  
+</body>  
+</html>  

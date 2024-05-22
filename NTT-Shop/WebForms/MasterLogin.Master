@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterLogin.master.cs" Inherits="NTT_Shop.WebForms.MasterLogin" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<script runat="server">  
+    
+</script>  
+
+<html>
+<head runat="server">
+    <title>NTT-Shop Login</title>  
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="smMaster" runat="server" EnablePartialRendering="true" EnableScriptGlobalization="true" ></asp:ScriptManager>
+        <div class="fixed-header">
+            <div class="container">
+                <nav>
+                    <a href="LoginForm.aspx">Login</a>
+                    <a href="RegisterForm.aspx">Register</a>
+                    <%--<a href="#" style="float:right">Cerrar sesión</a>--%>  
+                </nav>               
+            </div>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="fixed-footer">
+            <div class="container">
+                <nav>
+                    <a href="https://es.nttdata.com">nttdata.com</a>
+                </nav>
+            </div>        
+        </div>
+    </form>
+</body>
+</html>

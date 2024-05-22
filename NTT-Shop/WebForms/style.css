@@ -1,0 +1,111 @@
+﻿body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    margin: 0;
+    background-color: #90CF44;
+    width: max-content;
+    height: max-content;
+}
+article {
+    font-family: Verdana;
+    font-size: 0.9em;
+    background-color: #90CF44;
+}
+
+.fixed-header, .fixed-footer {
+    width: 100%;
+    position: fixed;
+    background: #59B512;
+    padding: 10px 0;
+    color: #fff;
+}
+
+.fixed-header {
+    top: 0;
+}
+
+.fixed-footer {
+    bottom: 0;
+}
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto; /* Center the DIV horizontally */
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 7px 25px;
+    display: inline-block;
+}
+
+.card {
+    width: 500px;
+    height: fit-content;
+    border: 1px solid;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 25px 0px;
+    border-radius: 3px;
+    margin: 1em 1.5%;
+    animation: scl 0.5s ease-in-out;
+    transform-origin: left center;
+    background-color: #fff;
+    padding: 2em 2em 2em 2em;
+}
+.card-title {
+    margin-top: -1.5em;
+    padding-bottom: 0.5em;
+    padding-left: 0.5em;
+    margin-bottom: 1em;
+    color: #ff6a00;
+    font-size: 2em;
+}
+.card.desc {
+    padding-left : 0.5em;
+    border-bottom: 1px solid;
+}
+.desc {
+    padding-left: 0.5em;
+    margin: 0.5em 0.5em 0.5em 0.5em;
+}
+.price {
+    color: #ff0000;
+    font-size: large;
+    margin: 0.5em 0.5em 0.5em 0.5em;
+}
+.droplist {
+    margin: 0.5em 0.5em 0.5em 0.5em;
+}
+.buto {
+    background-color: #8A3E73;
+    color: #fff;
+    border: none;
+    border-radius: 5em;
+    margin: 1em 1em 1em 1em;
+}
+
+.buto:hover {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5em;
+    margin: 1em 1em 1em 1em;
+}
+header {
+    margin: 0.5em 0.5em 0.5em 2em;
+}
+.login {
+    margin: 0.5em 0.5em 0.5em 2em;
+}
+.userError{
+    font-size: 0.55em;
+    color: #ff0000;
+    /*position: absolute;*/
+    /*margin-top: 5.5em;*/
+    margin-left: 0.5em;
+}
