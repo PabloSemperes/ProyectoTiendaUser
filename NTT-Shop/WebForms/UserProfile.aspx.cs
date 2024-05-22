@@ -15,6 +15,7 @@ namespace NTT_Shop.WebForms
 {
     public partial class UserProfile : System.Web.UI.Page
     {
+        //Carga la página del perfil de usuario
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["session-id"] != null) 
