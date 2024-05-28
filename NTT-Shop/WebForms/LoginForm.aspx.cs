@@ -59,7 +59,7 @@ namespace NTT_Shop.WebForms
         {
             sbyte result = -1;
             string url = @"https://localhost:7204/api/User/userLogin";
-            var userData = new { user = new User(login, password, "a", "a", "a") };
+            var userData = new { user = new User(login, password, "a", "a", "a","a") };
             string json = JsonConvert.SerializeObject(userData);
 
             HttpWebResponse httpResponse = null;

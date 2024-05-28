@@ -1,11 +1,13 @@
 ﻿using API_NTT_SHOP.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NTT_Shop.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,16 +18,28 @@ namespace NTT_Shop.WebForms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
 
+            }
+            List<Language> languages = GetAllLanguage();
+            foreach (Language language in languages)
+            {
+                ListItem item = new ListItem(language.description, language.iso);
+                cboxLanguage.Items.Add(item);
+            }
         }
         protected void btnNewRegister_Click(object sender, EventArgs e)
         {
             //Recoger valores formulario:
             string login = txtLogin.Text, pass = txtPass.Text,
-            name = txtName.Text, surname = txtSurname.Text, email = txtMail.Text; 
+            name = txtName.Text, surname = txtSurname.Text, email = txtMail.Text;
+
+
+            string language = cboxLanguage.SelectedValue;
 
             //Crear nuevo elemento invocando método API de inserción
-            sbyte result = InsertUser(login, pass, name, surname, email);
+            sbyte result = InsertUser(login, pass, name, surname, email, language);
             
 
             // Mostrar mensaje:
@@ -39,6 +53,7 @@ namespace NTT_Shop.WebForms
                     txtName.Text = string.Empty;
                     txtSurname.Text = string.Empty;
                     txtMail.Text = string.Empty;
+
                     break;
                 case 1:
                     txtLogin.Text = string.Empty;
@@ -72,11 +87,11 @@ namespace NTT_Shop.WebForms
             ScriptManager.RegisterStartupScript(this, GetType(),
                                   "ServerControlScript", script, true);
         }
-        private sbyte InsertUser(string login, string pass, string name, string surname, string email)
+        private sbyte InsertUser(string login, string pass, string name, string surname, string email, string cboxLanguage)
         {
             sbyte result = -1;
             string url = @"https://localhost:7204/api/User/InsertUser";
-            var userData = new { user = new User(login,pass,name,surname,email) };
+            var userData = new { user = new User(login,pass,name,surname,email, cboxLanguage) };
             string json = JsonConvert.SerializeObject(userData);
 
             HttpWebResponse httpResponse = null;
@@ -105,6 +120,34 @@ namespace NTT_Shop.WebForms
                 else if (ex.Message.Contains("404")) result = 3;
             }
             return result;
+        }
+        public List<Language> GetAllLanguage()
+        {
+              string baseUrl = "https://localhost:7204/api/";
+              List<Language> languages = new List<Language>();
+
+            try
+            {
+                string url = baseUrl + "Language/getAllLanguages";
+                var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpRequest.Method = "GET";
+
+                var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    var json = JObject.Parse(result);
+                    var languageArray = json["languageList"].ToObject<JArray>();
+                    languages = languageArray.ToObject<List<Language>>();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener los idiomas: {ex.Message}");
+            }
+
+            return languages;
         }
     }
 }

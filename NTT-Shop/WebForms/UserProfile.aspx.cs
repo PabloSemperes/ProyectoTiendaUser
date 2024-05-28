@@ -37,6 +37,12 @@ namespace NTT_Shop.WebForms
                     labelPhone.Visible = false;
                     labelPostalCode.Visible = false;
                 }
+                List<Language> languages = GetAllLanguage();
+                foreach (Language language in languages)
+                {
+                    ListItem item = new ListItem(language.description, language.iso);
+                    cboxLanguage.Items.Add(item);
+                }
             }
             else Response.Redirect("http://localhost:63664/WebForms/LoginForm.aspx");
         }
@@ -107,6 +113,8 @@ namespace NTT_Shop.WebForms
             userNew.Town = txtCity.Text;
             userNew.PostalCode = txtPostalCode.Text;
             userNew.Phone = txtPhone.Text;
+            string language = cboxLanguage.SelectedValue;
+            userNew.Language = language;
             var userData = new { user = userNew };
             string json = JsonConvert.SerializeObject(userData);
 
@@ -146,6 +154,34 @@ namespace NTT_Shop.WebForms
                 else if (ex.Message.Contains("400")) result = 0;
             }
             return result;
+        }
+        public List<Language> GetAllLanguage()
+        {
+            string baseUrl = "https://localhost:7204/api/";
+            List<Language> languages = new List<Language>();
+
+            try
+            {
+                string url = baseUrl + "Language/getAllLanguages";
+                var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpRequest.Method = "GET";
+
+                var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    var json = JObject.Parse(result);
+                    var languageArray = json["languageList"].ToObject<JArray>();
+                    languages = languageArray.ToObject<List<Language>>();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener los idiomas: {ex.Message}");
+            }
+
+            return languages;
         }
     }
 }

@@ -49,6 +49,14 @@
                             </td>
                         </tr>
                         <tr>
+                            <td style="height: 57px">
+                                <asp:Label ID="Label6" runat="server">Idioma</asp:Label>
+                            </td>
+                            <td style="height: 57px">
+                                 <asp:DropDownList ID="cboxLanguage" runat="server" style="width: 200px; float: left;" ></asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
                             <td></td>
                             <td class="CELDA7 width4" align="left" style="height: 57px">
                                <asp:Button id="btnNewRegister" runat="server" OnClick="btnNewRegister_Click" Text="Registrarse" />
