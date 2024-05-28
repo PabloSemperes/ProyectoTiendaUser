@@ -160,6 +160,12 @@ namespace NTT_Shop.WebForms
                     break;
                 case 1:
                     script = "alert(\"Compra finalizada\");";
+                    foreach(var cart in cartList)
+                    {
+                        var stock = cart.product.stock -cart.quantity;
+                        cart.product.stock = stock;
+                        UpdateProduct(cart.product);
+                    }
                     Session["Cart"] = null;
                     Response.Redirect("http://localhost:63664/WebForms/CartView.aspx");
                     break;
@@ -171,6 +177,40 @@ namespace NTT_Shop.WebForms
             }
             ScriptManager.RegisterStartupScript(this, GetType(),
                                   "ServerControlScript", script, true);
+        }
+
+        private sbyte UpdateProduct(Product product)
+        {
+            sbyte result = -1;
+            string url = @"https://localhost:7204/api/Product/updateProduct";
+            var productData = new { product = product};
+            string json = JsonConvert.SerializeObject(productData);
+
+            HttpWebResponse httpResponse = null;
+
+            try
+            {
+                var httpRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpRequest.Method = "PUT";
+
+                httpRequest.Accept = "application/json";
+                httpRequest.ContentType = "application/json";
+
+                using (var streamWriter = new StreamWriter(httpRequest.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                }
+
+                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+
+                result = 1;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("404")) result = 2;
+                else if (ex.Message.Contains("400")) result = 0;
+            }
+            return result;
         }
     }
 }
