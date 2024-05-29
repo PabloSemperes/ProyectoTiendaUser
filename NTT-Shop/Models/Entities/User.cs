@@ -36,9 +36,9 @@ namespace NTT_Shop.Models.Entities
         public int Rate { get; set; }
 
         public User() { }
-        public User(string login, string pass, string name, string surname, string mail)
+        public User(string login, string pass, string name, string surname, string mail, string language)
         {
-            this.PkUser=0; this.Login=login; this.Password=pass; this.Name=name; this.Surname1=surname; this.Surname2="Apellido"; this.Adress="Direccion"; this.Province="Provincia"; this.Town="Ciudad"; this.Phone="000000000000"; this.PostalCode="00000"; this.Email=mail; this.Language="es"; this.Rate=1;
+            this.PkUser=0; this.Login=login; this.Password=pass; this.Name=name; this.Surname1=surname; this.Surname2="Apellido"; this.Adress="Direccion"; this.Province="Provincia"; this.Town="Ciudad"; this.Phone="000000000000"; this.PostalCode="00000"; this.Email=mail; this.Language=language; this.Rate=1;
         }
     }
 }

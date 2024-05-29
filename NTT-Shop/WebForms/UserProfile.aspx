@@ -95,7 +95,15 @@
                             <asp:Label ID="Label5" runat="server">Email</asp:Label>
                         </td>
                         <td style="height: 57px">
-                            <asp:TextBox ID="txtMail" MaxLength="100" runat="server" Height="29px" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="txtMail" type="email" MaxLength="100" runat="server" Height="29px" ReadOnly="true"></asp:TextBox>
+                        </td>
+                    </tr>
+                      <tr>
+                        <td style="height: 57px">
+                            <asp:Label ID="Label12" runat="server">Idioma</asp:Label>
+                        </td>
+                        <td style="height: 57px">
+                             <asp:DropDownList ID="cboxLanguage" runat="server" style="width: 200px; float: left;" ></asp:DropDownList>
                         </td>
                     </tr>
                     <tr>
@@ -104,6 +112,7 @@
                            <asp:Button id="btnNewRegister" runat="server" OnClick="btnUpdate_Click" Text="Actualizar datos" />
                         </td>
                     </tr>
+                      
                 </table>
              </article>
         </section>
