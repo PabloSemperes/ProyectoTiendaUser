@@ -24,7 +24,6 @@ namespace NTT_Shop.WebForms
                     int sesion = int.Parse(Session["session-id"].ToString());
                     User user = GetUser(sesion);
                     txtLogin.Text = user.Login;
-                    txtPass.Text = user.Password;
                     txtName.Text = user.Name;
                     txtSurname.Text = user.Surname1;
                     txtSurname2.Text = user.Surname2;
@@ -182,6 +181,11 @@ namespace NTT_Shop.WebForms
             }
 
             return languages;
+        }
+
+        protected void btnCambiarC_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CambiarContrasenya.aspx");
         }
     }
 }

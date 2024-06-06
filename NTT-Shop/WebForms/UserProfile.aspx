@@ -17,12 +17,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="height: 57px">
-                            <asp:Label ID="Label2" runat="server">Contraseña</asp:Label>
-                        </td>
-                        <td style="height: 57px">
-                            <asp:TextBox ID="txtPass" MaxLength="100" runat="server" Height="29px" ReadOnly="true"></asp:TextBox>
-                        </td>
+                        <div class="col-4 d-grid gap-2" style="margin-top: 10px;">
+                            <asp:Button runat="server" ID="btnCambiarC" Text="Cambiar Contraseña"  OnClick="btnCambiarC_Click"  class="btn btn-outline-secondary"/>
+                        </div>
                     </tr>
                     <tr>
                         <td style="height: 57px">

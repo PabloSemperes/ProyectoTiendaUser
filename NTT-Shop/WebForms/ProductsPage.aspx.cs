@@ -50,6 +50,7 @@ namespace NTT_Shop.WebForms
         private List<Product> GetAllProducts()
         {
             List<Product> list = new List<Product>();
+            List<Product> listaDefinitiva = new List<Product>();
 
             string url = @"https://localhost:7204/api/Product/getAllProducts/";
             string currentLanguage = Session["session-language"].ToString();
@@ -68,13 +69,18 @@ namespace NTT_Shop.WebForms
                     JObject jsonObject = JObject.Parse(result);
                     JArray jsonArray = jsonObject["products"].ToObject<JArray>();
                     list = jsonArray.ToObject<List<Product>>();
+                    
+                    foreach (Product producto in list)
+                    {
+                        if(producto.descriptions.Count > 0) listaDefinitiva.Add(producto);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }
-            return list;
+            return listaDefinitiva;
         }
         private Product GetProduct(int id)
         {

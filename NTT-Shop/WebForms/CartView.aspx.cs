@@ -150,7 +150,21 @@ namespace NTT_Shop.WebForms
         protected void Compra_Click(object sender, EventArgs e)
         {
             List<Cart> cartList = FillCart();
-            sbyte result = InsertOrder(cartList);
+            bool checkStock = true;
+            sbyte result = -1;
+            foreach (Cart item in cartList)
+            {
+                int stock = item.product.stock - item.quantity;
+                if (stock < 0) 
+                {
+                    checkStock = false;
+                    result = 2;
+                }
+            }
+            if (checkStock) 
+            {
+                result = InsertOrder(cartList);
+            }
 
             string script = "alert(\"Error\");";
             switch (result)
@@ -170,7 +184,7 @@ namespace NTT_Shop.WebForms
                     Response.Redirect("http://localhost:63664/WebForms/CartView.aspx");
                     break;
                 case 2:
-                    script = "alert(\"Conflicto\");";
+                    script = "alert(\"Alguno de los productos sobrepasaba el stock. Orden cancelada\");";
                     break;
                 default:
                     break;

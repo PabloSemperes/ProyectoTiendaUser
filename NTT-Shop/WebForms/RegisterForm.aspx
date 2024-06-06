@@ -45,7 +45,7 @@
                                 <asp:Label ID="Label5" runat="server">Email</asp:Label>
                             </td>
                             <td style="height: 57px">
-                                <asp:TextBox ID="txtMail" MaxLength="100" runat="server" Height="29px"></asp:TextBox>
+                                <asp:TextBox ID="txtMail" type="email" MaxLength="100" runat="server" Height="29px"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
